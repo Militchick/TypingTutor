@@ -2,68 +2,109 @@
 //Miguel Pastor
 
 using System;
-using System.Collections.Generic;
 using System.IO;
 
 class TypingTutor
 {
 
+    public void Main()
+    {
+        typingtutor();
+    }
+
     public static void typingtutor()
     {
-        if (!File.Exists("execise0101.dat"))
+        string namefile = Console.ReadLine();
+
+        string path = @"c:\typo\" + namefile;
+
+        if (!File.Exists(namefile))
         {
             Console.WriteLine("File not found!");
+
+            StreamWriter write = File.CreateText(namefile + ".dat");
+            write.Write("asdfg asdfg asdfg asdfg asdfg asdfg asdfg asdfg asdfg asdfg" +
+            "asdfg asdfg asdfg asdfg asdfg asdfg asdfg asdfg asdfg asdfg" +
+            "asdfg asdfg asdfg asdfg asdfg asdfg asdfg asdfg asdfg asdfg");
+
+            write.Close();
         }
         else
         {
             try
             {
-                StreamWriter asdf = File.CreateText("execise0101.dat");
-                asdf.Write("asdfg asdfg asdfg asdfg asdfg asdfg asdfg asdfg asdfg asdfg" +
-                "asdfg asdfg asdfg asdfg asdfg asdfg asdfg asdfg asdfg asdfg" +
-                "asdfg asdfg asdfg asdfg asdfg asdfg asdfg asdfg asdfg asdfg");
-
-                FileStream asd = File.OpenRead("execise0101.dat");
-
-                Console.Write(asd);
+                StreamReader read = new StreamReader(path);
+                
+                Console.Write(read.ReadLine());
                 Console.WriteLine();
                 Console.WriteLine();
                 Console.WriteLine();
 
                 Console.BackgroundColor = ConsoleColor.DarkBlue;
                 Console.ForegroundColor = ConsoleColor.Cyan;
-                string input = Console.ReadLine();
-                if (input != "asdfg")
+                read.Close();
+
+                char input;
+
+                do
                 {
-                    if(input.StartsWith("a"))
+                    input = Convert.ToChar(Console.ReadLine());
+                    if (input != 'a')
+                    {
+                        if (input != 's')
+                        {
+                            if (input != 'd')
+                            {
+                                if (input != 'f')
+                                {
+                                    if (input != 'g')
+                                    {
+                                        Console.ForegroundColor = ConsoleColor.Yellow;
+                                        Console.BackgroundColor = ConsoleColor.DarkRed;
+                                    }
+                                    else
+                                    {
+                                        Console.BackgroundColor = ConsoleColor.DarkBlue;
+                                        Console.ForegroundColor = ConsoleColor.Cyan;
+                                    }
+                                }
+                                else
+                                {
+                                    Console.BackgroundColor = ConsoleColor.DarkBlue;
+                                    Console.ForegroundColor = ConsoleColor.Cyan;
+                                }
+                            }
+                            else
+                            {
+                                Console.BackgroundColor = ConsoleColor.DarkBlue;
+                                Console.ForegroundColor = ConsoleColor.Cyan;
+                            }
+                        }
+                        else
+                        {
+                            Console.BackgroundColor = ConsoleColor.DarkBlue;
+                            Console.ForegroundColor = ConsoleColor.Cyan;
+                        }
+                    }
+                    else
                     {
                         Console.BackgroundColor = ConsoleColor.DarkBlue;
                         Console.ForegroundColor = ConsoleColor.Cyan;
                     }
-                    else
-                    {
-                        Console.ForegroundColor = ConsoleColor.Yellow;
-                        Console.BackgroundColor = ConsoleColor.DarkRed;
-                    }
-
-                    if(input.EndsWith("g"))
-                    {
-                        Console.BackgroundColor = ConsoleColor.DarkBlue;
-                        Console.ForegroundColor = ConsoleColor.Cyan;
-                    }
-                    else
-                    {
-                        Console.ForegroundColor = ConsoleColor.Yellow;
-                        Console.BackgroundColor = ConsoleColor.DarkRed;
-                    }
-
-                    Console.ForegroundColor = ConsoleColor.Yellow;
-                    Console.BackgroundColor = ConsoleColor.DarkRed;
                 }
+                while (input != ' ');
             }
-            catch (Exception e)
+            catch (PathTooLongException a)
             {
-                throw e;
+                throw a;
+            }
+            catch (IOException b)
+            {
+                throw b;
+            }
+            catch (Exception c)
+            {
+                throw c;
             }
         }
     }
